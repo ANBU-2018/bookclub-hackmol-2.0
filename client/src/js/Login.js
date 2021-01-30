@@ -10,7 +10,7 @@ function Login() {
     let history = useHistory()
     const handleLogin = async (e) => {
         e.preventDefault()
-        const postLogin = await fetch("http://localhost:8000/user/login", {
+        const postLogin = await fetch("http://localhost:9000/user/login", {
             method: "POST",
             headers: {
                 "Content-type": "application/Json",
@@ -22,6 +22,12 @@ function Login() {
         });
         const data = await postLogin.json();
         console.log(data);
+        if(!jwtToken){setJwtToken(data[4])}
+        if(jwtToken){
+            history.push('/home')
+        }else{
+            console.log(data)
+        }
     }
     return (
         <div className="container2">
