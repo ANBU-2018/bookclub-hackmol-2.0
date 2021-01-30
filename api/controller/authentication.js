@@ -25,9 +25,8 @@ exports.postLogin = async (req, res, next) => {
           var result1 = [];
           let token = jwt.sign(
             { email: req.body.email },
-            process.env.TOKEN_SECRET
+            process.env.TOKEN_SECRET, { expiresIn: 86400 }
           );
-          res.cookie("auth-token", token);
 
           result.records.forEach((record) => {
             result1.push(
@@ -69,17 +68,16 @@ exports.adduser = async (req, res, next) => {
             username: "${req.body.username}",
             email: "${req.body.email}",
             password: "${hash}",
-            dateCreated: "${
-              date.getFullYear() +
-              "-" +
-              (date.getMonth() + 1) +
-              "-" +
-              date.getDate()
-            }"}) `;
+            dateCreated: "${date.getFullYear() +
+          "-" +
+          (date.getMonth() + 1) +
+          "-" +
+          date.getDate()
+          }"}) `;
         session
           .run(query, {})
           .then((result) => {
-            result.records.forEach((record) => {});
+            result.records.forEach((record) => { });
           })
           .catch((error) => {
             next(error);
