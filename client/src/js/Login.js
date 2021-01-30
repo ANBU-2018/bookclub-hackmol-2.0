@@ -7,6 +7,8 @@ function Login() {
     const [userMail, setUserMail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     const jwtToken = useSelector(state => state.jwtToken)
+
+    const handleLogin=()=>{};
     return (
         <div class="container2">
             <div class="row">

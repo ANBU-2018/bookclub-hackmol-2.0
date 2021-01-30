@@ -1,0 +1,38 @@
+
+.Genre{
+    width: 100%;
+    background-image: url('https://www.listenandlearn.org/the-teachers-handbook/wp-content/uploads/2014/01/iStock_000007819752Small.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.genre__buttons{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.genre__Type{
+    width: 80%;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.buttons{
+    width: 50%;
+    margin-top: 5px;
+    border-radius: 50px;
+}
+
+.buttonsChoose{
+    border-radius: 50px;
+}
+
+.submit{
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+}
