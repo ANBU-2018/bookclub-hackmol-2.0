@@ -20,7 +20,7 @@ function Login() {
         history.push('/home')
     }
     return (
-        <div class="container">
+        <div class="container2">
             <div class="row">
                 <div class="col-md-offset-5 col-md-4 text-center">
                     <h1 class='text-white'>Login</h1>
