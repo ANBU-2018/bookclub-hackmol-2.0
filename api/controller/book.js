@@ -35,7 +35,6 @@ exports.addBooks = async (req, res, next) => {
         chapters:${req.body.chapters},
         description:"${req.body.description}",
         price:${req.body.price},
-        genre:"${req.body.genre}",
         publication:"${req.body.publication}"
     }) `;
 
