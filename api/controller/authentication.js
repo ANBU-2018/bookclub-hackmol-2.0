@@ -24,7 +24,7 @@ exports.postLogin = async (req, res, next) => {
           res.send("USERNAME OR PASSWORD NOT CORRECT");
         } else {
           var result1 = [];
-          let token = jwt.sign({ email: req.body.email }, process.env.secret);
+          let token = jwt.sign({ email: req.body.email }, process.env.TOKEN_SECRET);
           res.cookie("auth-token", token);
 
           result.records.forEach((record) => {
@@ -66,17 +66,16 @@ exports.adduser = async (req, res, next) => {
             username: "${req.body.username}",
             email: "${req.body.email}",
             password: "${hash}",
-            dateCreated: "${
-              date.getFullYear() +
-              "-" +
-              (date.getMonth() + 1) +
-              "-" +
-              date.getDate()
-            }"}) `;
+            dateCreated: "${date.getFullYear() +
+          "-" +
+          (date.getMonth() + 1) +
+          "-" +
+          date.getDate()
+          }"}) `;
         session
           .run(query, {})
           .then((result) => {
-            result.records.forEach((record) => {});
+            result.records.forEach((record) => { });
           })
           .catch((error) => {
             next(error);
