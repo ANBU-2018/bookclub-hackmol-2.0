@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 import '../css/Login.css'
 
 function Login() {
     const [userMail, setUserMail] = useState('')
     const [userPassword, setUserPassword] = useState('')
-
+    const jwtToken = useSelector(state => state.jwtToken)
     return (
         <div class="container2">
             <div class="row">
