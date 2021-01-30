@@ -29,8 +29,8 @@ exports.postLogin = async (req, res, next) => {
 
           result.records.forEach((record) => {
             result1.push(
-              record._fields[0].properties.firstname,
               record._fields[0].properties.email,
+              record._fields[0].properties.firstname,
               record._fields[0].properties.lastname,
               record._fields[0].properties.username
             );

@@ -1,16 +1,16 @@
-POST http://localhost:3000/user/signup
+POST http://localhost:9000/user/signup
 content-type: application/json
 
 {
     "firstname": "Chabin",
     "lastname": "kukiel",
     "username": "Chabina",
-    "email": "chabin3@gmail.com",
+    "email": "kabin3@gmail.com",
     "password": "hello"
 }
 
 ###
-POST http://localhost:3000/user/login
+POST http://localhost:9000/user/login
 content-type: application/json
 
 {

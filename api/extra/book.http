@@ -1,0 +1,18 @@
+###
+GET http://localhost:9000/book
+
+###
+POST http://localhost:9000/book
+content-type: application/json
+
+{
+    "bookName": "Harry Poter:The goblet of Fire",
+    "author": "Babin",
+    "chapters": 10,
+    "description": "It is a splendid book of magic.",
+    "price": 100,
+    "publication": "harry",
+    "genre":"[magic,romance]"
+}
+
+###
