@@ -1,7 +1,11 @@
 var express = require("express");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+<<<<<<< HEAD
 var cors = require("cors");
+=======
+var cors=require('cors')
+>>>>>>> 176c0dbbb569e09ba76133e6c9a1f6e0341bea06
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
