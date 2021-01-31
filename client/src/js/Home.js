@@ -1,17 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import './../css/Home.css'
 import MenuAppBar from './AppBar';
 import BookListView from './BookListVIew';
 
 function Home(props) {
     const BookList=[
-        "Tera nam",
+        "Harry Potter : The deadly hallow 1",
         "Sahid",
         "Java",
         "Doraemon",
         "Naruto",
         "Solo leveling"
     ]
+    const email = useSelector(state => state.email)
     return (
         <div className="home">
             <nav>

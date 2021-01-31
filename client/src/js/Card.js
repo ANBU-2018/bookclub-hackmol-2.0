@@ -22,8 +22,8 @@ const useStyles = makeStyles({
 export default function MediaCard({Bookname}) {
     const classes = useStyles();
     const dispatch = useDispatch()
-    const transfer=async(e)=>{
-        dispatch(Book(e.target.value))
+    const transfer=async()=>{
+        dispatch(Book(Bookname))
     }
   return (
     <Card className={classes.root} style={{width:"300px"}}>
@@ -44,7 +44,7 @@ export default function MediaCard({Bookname}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Link to={`/books/${Bookname}`} onClick={transfer}><Button value={Bookname} size="medium" color="primary">
+        <Link to={`/books/${Bookname}`} onClick={transfer} ><Button  size="medium" color="primary">
           Learn More
         </Button>
         </Link>

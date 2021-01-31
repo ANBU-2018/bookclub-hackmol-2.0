@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import '../css/Login.css'
-import { Jwttoken } from '../redux/action';
+import { Email, FirstName, Jwttoken, LastName, UserName } from '../redux/action';
 
 function Login() {
     const jwtStored = useSelector(state => state.jwtToken)
@@ -25,9 +25,18 @@ function Login() {
                 password: userPassword,
             }),
         });
-        const data = await postLogin.json();
+        const data = await postLogin.json();    
         let jwt = data[4]
+        let email=data[0]
+        let firstName=data[1]
+        let lastName=data[2]
+        let userName=data[3]
         dispatch(Jwttoken(jwt))
+        dispatch(Email(email))
+        dispatch(FirstName(firstName))
+        dispatch(LastName(lastName))
+        dispatch(UserName(userName))
+
         if (jwt) {
             history.push('/home')
         }
