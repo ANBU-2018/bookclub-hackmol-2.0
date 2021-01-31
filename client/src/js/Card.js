@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Book } from '../redux/action';
+import { useEffect, useState } from 'react';
 
 const useStyles = makeStyles({
   root: {
@@ -25,8 +26,24 @@ export default function MediaCard({Bookname}) {
     const transfer=async()=>{
         dispatch(Book(Bookname))
     }
+    const [Details, setDetails] = useState([])
+    useEffect(() => {
+        async function bookDetail(){
+            const response=await fetch(`http://localhost:9000/book?bookName=${Bookname}`,{
+                method:"GET"
+            })
+            const {data}=await response.json()
+            setDetails(data);
+            console.log(data)
+        }
+        bookDetail();
+    },[])
+
   return (
-    <Card className={classes.root} style={{width:"300px"}}>
+    <div>
+    {Object.keys(Details).map((keys)=>{
+        return(
+        <Card className={classes.root} style={{width:"300px"}}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -38,8 +55,7 @@ export default function MediaCard({Bookname}) {
             {Bookname}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            {Details[0].description}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -49,6 +65,8 @@ export default function MediaCard({Bookname}) {
         </Button>
         </Link>
       </CardActions>
-    </Card>
+    </Card>)
+    })}
+    </div>
   );
 }
