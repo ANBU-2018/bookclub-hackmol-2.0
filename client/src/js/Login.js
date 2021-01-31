@@ -1,28 +1,41 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import '../css/Login.css'
+import { Jwttoken } from '../redux/action';
 
 function Login() {
+    const jwtStored = useSelector(state => state.jwtToken)
     const [userMail, setUserMail] = useState('')
     const [userPassword, setUserPassword] = useState('')
-    const [jwtToken, setJwtToken] = useState(useSelector(state => state.jwtToken))
+    const [jwtToken, setJwtToken] = useState(jwtStored ?? null)
+    const dispatch = useDispatch();
     let history = useHistory()
+
+    console.log(jwtStored)
     const handleLogin = async (e) => {
         e.preventDefault()
-        const postLogin = await fetch("http://localhost:8000/user/login", {
+        const postLogin = await fetch("http://localhost:9000/user/login", {
             method: "POST",
             headers: {
                 "Content-type": "application/Json",
             },
             body: JSON.stringify({
                 email: userMail,
-                password: userPassword
+                password: userPassword,
             }),
         });
         const data = await postLogin.json();
-        console.log(data);
+        let jwt = data[4]
+        dispatch(Jwttoken(jwt))
+        if (jwt) {
+            history.push('/home')
+        }
     }
+    if (jwtToken) {
+        history.push('/home')
+    }
+
     return (
         <div className="container2">
             <div className="row">
