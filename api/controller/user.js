@@ -1,5 +1,23 @@
 var driver = require("./../database");
 
+exports.getPrefrences = (req, res, next) => {
+  var session = driver.session();
+  var prefernces = [];
+  var query = `MATCH (n:people{email:$email})-[r:prefers]->(m:genre) return m`;
+  session
+    .run(query, {
+      email: req.query.email,
+    })
+    .then((result) => {
+      result.records.forEach((record) => {
+        prefernces.push(record._fields[0].properties.name);
+      });
+      res.send({ data: prefernces });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 exports.addPrefrences = (req, res, next) => {
   var session = driver.session();
   var query = `MATCH (n:people{username:$username}) MATCH(m:genre{name:$genre}) MERGE (n)-[r:prefers]->(m) return n`;

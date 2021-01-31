@@ -6,6 +6,7 @@ var userController = require("./../controller/user");
 /* GET users listing. */
 router
   .route("/preference")
+  .get(userController.getPrefrences)
   .post(userController.addPrefrences)
   .delete(userController.removePrefrences);
 router

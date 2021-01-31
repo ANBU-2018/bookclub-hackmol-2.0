@@ -4,6 +4,8 @@ exports.getBooks = async (req, res, next) => {
   var query = `MATCH (n:book) RETURN n`;
   if (req.query.bookName) {
     query = `MATCH (n:book{name:"${req.query.bookName}"}) RETURN n`;
+  } else if (req.query.userName) {
+    query = `MATCH (n:people{username:"user1"})-[r:prefers]->(m)<-[q:fallsunder]-(o:book) return o `;
   }
   var session = driver.session();
   session

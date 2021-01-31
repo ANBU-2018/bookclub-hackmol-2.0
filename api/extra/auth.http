@@ -14,6 +14,6 @@ POST http://localhost:9000/auth/login
 content-type: application/json
 
 {
-    "email": "chabin3@gmail.com",
-    "password": "hello"
+    "email": "user1@gmail.com",
+    "password": "user123"
 }
