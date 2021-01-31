@@ -1,18 +1,48 @@
 ###
-GET http://localhost:9000/book
-
+GET http://localhost:9000/book?bookName=Harry Potter : The deadly hallow 1
 ###
 POST http://localhost:9000/book
 content-type: application/json
 
 {
-    "bookName": "Harry Poter:The goblet of Fire",
+    "bookName":"Harry Potter : The deadly hallow 2",
     "author": "Babin",
     "chapters": 10,
     "description": "It is a splendid book of magic.",
     "price": 100,
     "publication": "harry",
-    "genre":"[magic,romance]"
+    "photo":"url.com",
+    "genre":["magic","romance","fantasy"]
 }
 
 ###
+POST http://localhost:9000/book/genre
+content-type: application/json
+
+{
+    "genre": ["Fantasy",
+        "Science Fiction",
+        "Dystopian",
+        "Adventure",
+        "Romance",
+        "Detective & Mystery",
+        "Horror",
+        "Thriller",
+        "LGBTQ+",
+        "Historical Fiction",
+        "Young Adult (YA)",
+        "Children’s Fiction"]
+}
+
+###
+POST http://localhost:9000/book/chapters
+content-type: application/json
+
+{
+    "bookName":"Harry Potter : The deadly hallow 2",
+    "titleNo": "2",
+    "titleName": "Harry Meets Hedrick"
+}
+
+###
+GET http://localhost:9000/book/chapters?bookName=Harry Potter : The deadly hallow 2
