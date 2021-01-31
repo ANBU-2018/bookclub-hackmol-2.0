@@ -5,10 +5,10 @@ exports.getBooks = async (req, res, next) => {
   if (req.query.bookName) {
     query = `MATCH (n:book{name:"${req.query.bookName}"}) RETURN n`;
   } else if (req.query.userName) {
-    query = `MATCH (n:people{username:"user1"})-[r:prefers]->(m)<-[q:fallsunder]-(o:book) return o `;
+    query = `MATCH (n:people{username:"user1"})-[r:prefers]->(m)<-[q:fallsunder]-(o:book) return distinct(o) `;
   }
   var session = driver.session();
-  session
+  await session
     .run(query, {})
     .then(async (result) => {
       var i = 0;
@@ -39,12 +39,12 @@ exports.getBooks = async (req, res, next) => {
             next(err);
           });
       });
-      res.send({ data: booklist });
       await session.close();
     })
     .catch((err) => {
       next(err);
     });
+  res.send({ data: booklist });
 };
 function linkGenre(bookName, genre, next) {
   var session = driver.session();

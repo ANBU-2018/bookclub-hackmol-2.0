@@ -1,11 +1,11 @@
-GET http://localhost:9000/users/preference?email=user1@gmail.com
+GET http://localhost:9000/users/preference?email=kabin3@gmail.com
 ###
 POST http://localhost:9000/users/preference
 content-type: application/json
 
 {
     "userName": "user1",
-    "genre":"romance"
+    "genre":"Horror"
 }
 
 ###

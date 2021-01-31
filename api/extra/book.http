@@ -1,18 +1,18 @@
 ###
-GET http://localhost:9000/book?bookName=Harry Potter : The deadly hallow 1
+GET http://localhost:9000/book?userName=user1
 ###
 POST http://localhost:9000/book
 content-type: application/json
 
 {
-    "bookName":"Harry Potter : The deadly hallow 2",
+    "bookName":"Harry Potter : Goblet of Fire",
     "author": "Babin",
-    "chapters": 10,
+    "chapters": "100",
     "description": "It is a splendid book of magic.",
-    "price": 100,
+    "price": "1000",
     "publication": "harry",
     "photo":"url.com",
-    "genre":["magic","romance","fantasy"]
+    "genre":["Horror"]
 }
 
 ###
