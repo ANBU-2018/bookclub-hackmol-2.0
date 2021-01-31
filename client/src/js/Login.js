@@ -25,20 +25,27 @@ function Login() {
                 password: userPassword,
             }),
         });
-        const data = await postLogin.json();    
-        let jwt = data[4]
-        let email=data[0]
-        let firstName=data[1]
-        let lastName=data[2]
-        let userName=data[3]
+        const bata = await postLogin.json();    
+        let jwt = bata[4]
+        let email=bata[0]
+        let firstName=bata[1]
+        let lastName=bata[2]
+        let userName=bata[3]
+        const preference=await fetch(`http://localhost:9000/users/preference?email=${email}`,{
+            method:"GET"
+        });
+        const {data}=await preference.json()
+        console.log(data)
         dispatch(Jwttoken(jwt))
         dispatch(Email(email))
         dispatch(FirstName(firstName))
         dispatch(LastName(lastName))
         dispatch(UserName(userName))
 
-        if (jwt) {
+        if (jwt && data.length != 0) {
             history.push('/home')
+        }else{
+            history.push('/genre')
         }
     }
     if (jwtToken) {
