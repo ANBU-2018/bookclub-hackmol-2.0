@@ -40,11 +40,11 @@ exports.getBooks = async (req, res, next) => {
           });
       });
       await session.close();
+      res.send({ data: booklist });
     })
     .catch((err) => {
       next(err);
     });
-  res.send({ data: booklist });
 };
 function linkGenre(bookName, genre, next) {
   var session = driver.session();
