@@ -47,3 +47,25 @@ exports.getComments = async (req, res, next) => {
       next(err);
     });
 };
+
+exports.addComments = async (req, res, next) => {
+  var session = driver.session();
+  var query;
+  if (req.query.bookName) {
+    query = `MATCH(n1:book{name:$bookName})
+  MATCH(n2:people(username:$userName))
+  MERGE (n2)-[r1:commentedOn{time:$time,text:$text}]->(n1)`;
+  }
+  if (req.query.title) {
+    query = `MATCH(n1:title{name:$titleName})-[r:belongsto]->(m1:book{book{name:$bookName}})
+    MATCH(n2:people(username:$userName))
+    MERGE (n2)-[r1:commentedOn{time:$time,text:$text}]->(n1)`;
+  }
+
+  session
+    .run(query, {})
+    .then(() => {})
+    .catch((err) => {
+      next(err);
+    });
+};
