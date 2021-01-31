@@ -1,0 +1,26 @@
+POST http://localhost:9000/users/preference
+content-type: application/json
+
+{
+    "userName": "user1",
+    "genre":"romance"
+}
+
+###
+DELETE http://localhost:9000/users/preference
+content-type: application/json
+
+{
+    "userName": "user1",
+    "genre":"romance"
+}
+
+###
+POST http://localhost:9000/users/favourite
+content-type: application/json
+
+{
+    "userName": "user1",
+    "bookName":"Harry Potter : The deadly hallow 1",
+    "priority":"1"
+}

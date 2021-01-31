@@ -19,6 +19,6 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/user", authRouter);
+app.use("/auth", authRouter);
 app.use("/book", bookRouter);
 module.exports = app;
