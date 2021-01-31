@@ -1,0 +1,20 @@
+
+.bookListView__list{
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+
+}
+
+.bookListView__Card{
+    margin-right: 10px;
+    margin-left: 10px;
+    
+}
+
+.bookListView__icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+

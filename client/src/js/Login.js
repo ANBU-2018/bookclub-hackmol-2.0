@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import '../css/Login.css'
-import { Jwttoken } from '../redux/action';
+import { Email, FirstName, Jwttoken, LastName, UserName } from '../redux/action';
 
 function Login() {
     const jwtStored = useSelector(state => state.jwtToken)
@@ -15,7 +15,7 @@ function Login() {
     console.log(jwtStored)
     const handleLogin = async (e) => {
         e.preventDefault()
-        const postLogin = await fetch("http://localhost:9000/user/login", {
+        const postLogin = await fetch("http://localhost:9000/auth/login", {
             method: "POST",
             headers: {
                 "Content-type": "application/Json",
@@ -25,11 +25,27 @@ function Login() {
                 password: userPassword,
             }),
         });
-        const data = await postLogin.json();
-        let jwt = data[4]
+        const bata = await postLogin.json();    
+        let jwt = bata[4]
+        let email=bata[0]
+        let firstName=bata[1]
+        let lastName=bata[2]
+        let userName=bata[3]
+        const preference=await fetch(`http://localhost:9000/users/preference?email=${email}`,{
+            method:"GET"
+        });
+        const {data}=await preference.json()
+        console.log(data)
         dispatch(Jwttoken(jwt))
-        if (jwt) {
+        dispatch(Email(email))
+        dispatch(FirstName(firstName))
+        dispatch(LastName(lastName))
+        dispatch(UserName(userName))
+
+        if (jwt && data.length != 0) {
             history.push('/home')
+        }else{
+            history.push('/genre')
         }
     }
     if (jwtToken) {

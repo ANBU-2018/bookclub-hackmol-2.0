@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import '../css/Genre.css'
 
@@ -20,18 +21,40 @@ function Genre() {
 
     const [Gen, setGen] = useState(genre)
     const [chosenGen, setchosenGen] = useState([])
-    const chosenGenre=(e)=>{
+    const userName = useSelector(state => state.userName)
+    const chosenGenre= async (e)=>{
         console.log(e.target.value)
         let gen=e.target.value
         setGen(Gen.filter(e=> e != gen))
-        setchosenGen(old=>[...old,gen])       
+        setchosenGen(old=>[...old,gen])
+        const response=await fetch('http://localhost:9000/users/preference',{
+            method:'POST',
+            headers:{
+                'Content-type':'application/json'
+            },
+            body:JSON.stringify({
+                userName:userName,
+                genre:gen
+            })
+        })       
     }
-    const removeGenre=(e)=>{
+    const removeGenre=async (e)=>{
         console.log(e.target.value)
         let gen=e.target.value
         setchosenGen(chosenGen.filter(e=> e != gen))
-        setGen(old=>[...old,gen])      
+        setGen(old=>[...old,gen])
+        const response=await fetch('http://localhost:9000/users/preference',{
+            method:'DELETE',
+            headers:{
+                'Content-type':'application/json'
+            },
+            body:JSON.stringify({
+                userName:userName,
+                genre:gen
+            })
+        })      
     }
+
     return (
         <div className='Genre'>
             <div>

@@ -10,7 +10,7 @@ function Signup() {
     const [userName, setuserName] = useState('')
 
     const UserSignUp = async () => {
-        const response = await fetch('http://localhost:9000/user/signup', {
+        const response = await fetch('http://localhost:9000/auth/signup', {
             method: 'POST',
             headers: {
                 "Content-type": 'application/json'
