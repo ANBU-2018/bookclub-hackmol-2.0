@@ -1,5 +1,5 @@
 ###
-GET http://localhost:9000/book?userName=user1
+GET http://localhost:9000/book?bookName=Harry Potter : The deadly hallow 2
 ###
 POST http://localhost:9000/book
 content-type: application/json

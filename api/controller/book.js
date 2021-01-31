@@ -5,53 +5,40 @@ exports.getBooks = async (req, res, next) => {
   if (req.query.bookName) {
     query = `MATCH (n:book{name:"${req.query.bookName}"}) RETURN n`;
   } else if (req.query.userName) {
-    query = `MATCH (n:people{username:"user1"})-[r:prefers]->(m)<-[q:fallsunder]-(o:book) return distinct(o) `;
+    query = `MATCH (n:people{username:"${req.query.userName}"})-[r:prefers]->(m:genre)<-[q:fallsunder]-(o:book) return distinct(o) `;
   }
   var session = driver.session();
-  await session
-    .run(query, {})
-    .then(async (result) => {
-      var i = 0;
-      var booklist = [];
-      result.records.forEach(async (record) => {
-        booklist.push(record._fields[0].properties);
-        var genrelist = [];
-        var session2 = driver.session();
-        await session2
-          .run(
-            `MATCH (n:book{name:$bookName})-[r:fallsunder]->(m:genre) RETURN m`,
-            {
-              bookName: booklist[i].name,
-            }
-          )
-          .then((result) => {
-            console.log("result.records[1]._fields[0]");
-            result.records.forEach((record) => {
-              genrelist.push(record._fields[0].properties.name);
-              session2.close();
-            });
-            console.log(genrelist);
-            booklist[i].genre = genrelist;
-            console.log(booklist[i]);
-            i++;
-          })
-          .catch((err) => {
-            next(err);
-          });
-      });
-      await session.close();
-      res.send({ data: booklist });
-    })
-    .catch((err) => {
-      next(err);
+  const result = await session.run(query, {})
+  var i = 0;
+  var booklist = [];
+  result.records.forEach(async (record) => {
+    booklist.push(record._fields[0].properties);
+    var genrelist = [];
+    var session2 = driver.session();
+    const result2 = await session2
+      .run(
+        `MATCH (n:book{name:$bookName})-[r:fallsunder]->(m1:genre) RETURN m1`,
+        {
+          bookName: booklist[i].name,
+        }
+      )
+    result2.records.forEach(async (record) => {
+      genrelist.push(record._fields[0].properties.name);
+      await session2.close();
     });
+    booklist[i].genre = genrelist;
+    i++;
+  })
+  await session.close();
+  console.log(booklist)
+  setTimeout(() => { res.send({ data: booklist }); }, [4000])
 };
 function linkGenre(bookName, genre, next) {
   var session = driver.session();
   var query = `MATCH (n:book{name:"${bookName}"}) MATCH (m:genre{name:"${genre}"}) MERGE (n)-[r:fallsunder]->(m) return n,m; `;
   session
     .run(query, {})
-    .then(() => {})
+    .then(() => { })
     .catch((err) => {
       next(err);
     });
