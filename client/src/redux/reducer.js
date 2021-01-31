@@ -4,6 +4,7 @@ const initialState={
     userName:null,
     firstName:null,
     email:null,
+    chapterName:null
 }
 
 export const reducer = (state = initialState, action) => {
@@ -37,6 +38,11 @@ export const reducer = (state = initialState, action) => {
                 return {
                     ...state,
                     email:action.payload
+                }
+        case 'ChapterName':
+                return {
+                    ...state,
+                    chapterName:action.payload
                 }
         default:
             return{

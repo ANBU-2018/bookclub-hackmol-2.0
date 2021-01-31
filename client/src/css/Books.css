@@ -1,3 +1,22 @@
 h1{
     color:black !important;
 }
+
+.books{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.books__Desc{
+    margin-left: 20px;
+    width: 100%;
+}
+
+.books__Chapter{
+    width: 100%;
+}
+
+.books__Chapter > h3{
+    margin-left: 15px;
+}

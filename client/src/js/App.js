@@ -5,6 +5,7 @@ import Signup from './Signup';
 import Genre from './Genre';
 import Home from './Home';
 import Books from './Books';
+import Chapter from './Chapter';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/signup' render={() => <Signup />} />
         <Route path='/home' render={() => <Home />} />
         <Route path='/genre' render={() => <Genre />} />
+        <Route path='/chapter/:id' component={Chapter} />
         <Route path='/books/:id' component={Books} />
       </Switch>
     </Router>

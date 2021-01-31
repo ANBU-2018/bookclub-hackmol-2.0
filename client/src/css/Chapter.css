@@ -1,0 +1,15 @@
+.chapter__comment{
+    position:fixed;
+    bottom:0;
+    margin-bottom: 10px;    
+    width: 100%;
+}
+
+.chapter__comment > input{
+    width: 100%;
+}
+
+.chapter{
+    display: flex;
+    justify-content: center;
+}

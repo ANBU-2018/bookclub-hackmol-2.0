@@ -53,6 +53,10 @@ export default function MenuAppBar() {
 
   }
 
+  const home=()=>{
+      history.push('/home')
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -60,7 +64,7 @@ export default function MenuAppBar() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h3" className={classes.title}>
+          <Typography variant="h3" className={classes.title} onClick={home}>
             Books
           </Typography>
             <div>

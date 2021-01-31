@@ -35,3 +35,10 @@ export const LastName = (data) => {
         payload: data
     }
 }
+
+export const ChapterName = (data) => {
+    return {
+        type: 'ChapterName',
+        payload: data
+    }
+}
