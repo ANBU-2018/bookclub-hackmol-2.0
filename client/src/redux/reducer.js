@@ -1,5 +1,6 @@
 const initialState={
-    jwtToken:null
+    jwtToken:null,
+    bookName:null
 }
 
 export const reducer = (state = initialState, action) => {
@@ -9,6 +10,11 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 jwtToken: action.payload
             }
+        case 'Book':
+                return {
+                    ...state,
+                    bookName:action.payload
+                }
         default:
             return{
                 ...state,

@@ -19,20 +19,22 @@ exports.postLogin = async (req, res, next) => {
           req.body.password,
           result.records[0]._fields[0].properties.password
         );
-        console.log(result);
         if (!passwordMatched) {
           res.send("USERNAME OR PASSWORD NOT CORRECT");
         } else {
           var result1 = [];
-          let token = jwt.sign({ email: req.body.email }, process.env.TOKEN_SECRET);
-          res.cookie("auth-token", token);
+          let token = jwt.sign(
+            { email: req.body.email },
+            process.env.TOKEN_SECRET, { expiresIn: 86400 }
+          );
 
           result.records.forEach((record) => {
             result1.push(
               record._fields[0].properties.email,
               record._fields[0].properties.firstname,
               record._fields[0].properties.lastname,
-              record._fields[0].properties.username
+              record._fields[0].properties.username,
+              token
             );
           });
           res.send(result1);

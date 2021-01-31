@@ -2,12 +2,13 @@ var express = require("express");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
-require('dotenv').config({ path: './config.env' })
+require("dotenv").config({ path: "./config.env" });
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var authRouter = require("./routes/authenticationRouter");
 var bookRouter = require("./routes/bookRouter");
+const { NotImplemented } = require("http-errors");
 
 var app = express();
 

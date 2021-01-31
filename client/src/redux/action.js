@@ -4,3 +4,10 @@ export const Jwttoken = (data) => {
         payload: data
     }
 }
+
+export const Book = (data) => {
+    return {
+        type: 'Book',
+        payload: data
+    }
+}

@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import '../css/Signup.css'
 
 function Signup() {
@@ -9,25 +9,25 @@ function Signup() {
     const [Lastname, setLastname] = useState('')
     const [userName, setuserName] = useState('')
 
-    const UserSignUp=async()=>{
-        const response=await fetch('http://localhost:9000/user/signup',{
-                method:'POST',
-                headers:{
-                    "Content-type":'application/json'
-                },
-                body:JSON.stringify({
-                    'email':userMail,
-                    'firstname':Firstname,
-                    'lastname':Lastname,
-                    'username':userName,
-                    'password':userPassword 
-                })
+    const UserSignUp = async () => {
+        const response = await fetch('http://localhost:9000/auth/signup', {
+            method: 'POST',
+            headers: {
+                "Content-type": 'application/json'
+            },
+            body: JSON.stringify({
+                'email': userMail,
+                'firstname': Firstname,
+                'lastname': Lastname,
+                'username': userName,
+                'password': userPassword
+            })
 
-            }
-        
+        }
+
         )
     }
-    
+
     return (
         <div className="container1">
             <div className="row">
